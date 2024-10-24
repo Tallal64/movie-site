@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0, 0%, 7.1%; /* Deep Charcoal */
+    --foreground: 210, 20%, 98%; /* Light Text */
+
+    --card: 0, 0%, 7.1%; /* Same as background */
+    --card-foreground: 210, 20%, 98%; /* Light Text */
+
+    --popover: 0, 0%, 7.1%; /* Same as background */
+    --popover-foreground: 210, 20%, 98%; /* Light Text */
+
+    --primary: 0, 84.2%, 60.2%; /* Vibrant Red */
+    --primary-foreground: 0, 0%, 98%; /* Light Text */
+
+    --secondary: 44, 100%, 50%; /* Golden Yellow */
+    --secondary-foreground: 220, 13%, 91%; /* Light Gray */
+
+    --muted: 220, 13%, 91%; /* Light Gray */
+    --muted-foreground: 240, 3.8%, 46.1%; /* Medium Gray */
+
+    --accent: 204, 100%, 50%; /* Cool Cyan */
+    --accent-foreground: 220, 13%, 91%; /* Light Gray */
+
+    --destructive: 0, 100%, 50%; /* Darker Red */
+    --destructive-foreground: 0, 0%, 98%; /* Light Text */
+
+    --border: 240, 3.8%, 46.1%; /* Light Gray */
+    --input: 240, 5.9%, 90%; /* Light Gray */
+
+    --ring: 204, 100%, 50%; /* Cool Cyan */
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-body bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading;
+  }
+
+  p {
+    @apply font-body;
+  }
+
+  .title-font {
+    @apply font-title;
+  }
+}
