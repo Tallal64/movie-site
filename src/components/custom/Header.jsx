@@ -28,21 +28,22 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full px-4 lg:px-8 py-6 flex items-center justify-between">
-      <div className="flex items-center space-x-4 lg:space-x-16">
+    // when we scroll the color should be "bg-[#141414]"
+    <header className="w-full py-6 px-5 lg:px-12 flex items-center justify-between bg-gradient-to-b from-[#141414]">
+      <div className="flex items-center space-x-4 lg:space-x-12">
         <Link to="/" className="flex space-x-1">
-          <Film className="h-[24px] w-[24px]" />
-          <span className="text-2xl font-semibold font-title leading-7">
+          <Film className="h-[20px] w-[20px]" />
+          <span className="text-xl font-semibold font-title leading-6">
             MovieStream
           </span>
         </Link>
 
-        <nav className="hidden md:flex space-x-4 lg:space-x-6">
+        <nav className="hidden md:flex space-x-4 lg:space-x-6 px-6">
           {links.map((link) => (
             <NavLink
               key={link.label}
               to={link.href}
-              className="transition-colors duration-300 text-secondary-foreground font-body"
+              className="transition-colors duration-300 text-secondary-foreground text-sm font-body"
             >
               {link.label}
             </NavLink>
@@ -62,7 +63,7 @@ const Header = () => {
           />
         </div>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+          <AvatarImage src="https://avatars.githubusercontent.com/u/124599?v=4" alt="User" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>
