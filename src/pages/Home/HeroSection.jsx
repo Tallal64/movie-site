@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { useGetCurrentlyPlayingMoviesInTheatresQuery } from "@/redux/services/services";
-import { Play, Info, CirclePlay } from "lucide-react";
+import { useGetPopularMoviesQuery } from "@/redux/services/services";
+import { CirclePlay, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [movies, SetMovies] = useState("");
-  const { data, error, isLoading } =
-    useGetCurrentlyPlayingMoviesInTheatresQuery();
+  const { data, error, isLoading } = useGetPopularMoviesQuery();
 
   // random selection
   const movie = movies[Math.floor(Math.random() * movies.length)];
@@ -26,14 +25,19 @@ const HeroSection = () => {
   }, [error, isLoading, data, movie]);
 
   return (
-    <div className="px-5 lg:px-12">
+    <div className="">
+      {/* bottom strip to blur the showCase img from it's bottom */}
+      <div className="absolute bottom-[-5%] w-full h-28 bg-background blur-xl border" />
+
       {error ? (
-        <>Oh no, there was an error</>
+        <div className="text-xl text-primary capitalize">
+          there was an error while fetching the API
+        </div>
       ) : isLoading ? (
-        <>Loading...</>
+        <div className="text-secondary-foreground">Loading...</div>
       ) : data ? (
-        <div className="h-[750px] pb-32 flex flex-col items-start justify-end gap-y-7">
-          <h3 className="text-8xl font-semibold max-w-screen-lg">
+        <div className="h-[720px] px-5 lg:px-12 pb-32 flex flex-col items-start justify-end gap-y-7">
+          <h3 className="text-7xl font-semibold max-w-screen-lg">
             {movie?.title}
           </h3>
           <p className="text-xl max-w-screen-lg font-medium text-white/65">
@@ -51,12 +55,12 @@ const HeroSection = () => {
           </div>
 
           {/* background image */}
-          <div className="absolute right-0 top-0 h-[850px] w-full -z-10 ">
-            <div className="absolute top-0 right-0 w-full h-full bg-black/65" />
+          <div className="absolute right-0 top-0 h-full w-full -z-10 ">
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-black/90" />
             <img
               alt="img"
               src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover "
             />
           </div>
         </div>

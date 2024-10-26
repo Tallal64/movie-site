@@ -15,10 +15,23 @@ export const TMDB_API = createApi({
 
   endpoints: (builder) => ({
     getCurrentlyPlayingMoviesInTheatres: builder.query({
-      query: () => 'movie/now_playing?language=en-US&page=1',
-
+      query: () => "movie/now_playing",
+    }),
+    getPopularMovies: builder.query({
+      query: () => "movie/popular",
+    }),
+    getTopRatedMovies: builder.query({
+      query: () => "movie/top_rated",
+    }),
+    getUpcomingMovies: builder.query({
+      query: () => "movie/upcoming",
     }),
   }),
 });
 
-export const { useGetCurrentlyPlayingMoviesInTheatresQuery } = TMDB_API;
+export const {
+  useGetCurrentlyPlayingMoviesInTheatresQuery,
+  useGetPopularMoviesQuery,
+  useGetTopRatedMoviesQuery,
+  useGetUpcomingMoviesQuery,
+} = TMDB_API;

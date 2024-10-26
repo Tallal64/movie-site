@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     // when we scroll the color should be "bg-[#141414]"
-    <header className="w-full py-6 px-5 lg:px-12 flex items-center justify-between bg-gradient-to-b from-[#141414]">
+    <header className="w-full py-6 px-5 lg:px-12 flex items-center justify-between bg-gradient-to-b from-[#121212]">
       <div className="flex items-center space-x-4 lg:space-x-12">
         <Link to="/" className="flex space-x-1">
           <Film className="h-[20px] w-[20px]" />
