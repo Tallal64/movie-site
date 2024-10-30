@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const TMDB_API = createApi({
-  reducerPath: "TMDB_API",
+export const MovieApis = createApi({
+  reducerPath: "MovieApis",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.themoviedb.org/3/",
     prepareHeaders: (headers) => {
@@ -14,6 +14,10 @@ export const TMDB_API = createApi({
   }),
 
   endpoints: (builder) => ({
+    // MOVIE LISTS
+    getTrendingMovies: builder.query({
+      query: () => "trending/movie/day",
+    }),
     getCurrentlyPlayingMoviesInTheatres: builder.query({
       query: () => "movie/now_playing",
     }),
@@ -30,8 +34,9 @@ export const TMDB_API = createApi({
 });
 
 export const {
+  useGetTrendingMoviesQuery,
   useGetCurrentlyPlayingMoviesInTheatresQuery,
   useGetPopularMoviesQuery,
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
-} = TMDB_API;
+} = MovieApis;

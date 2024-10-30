@@ -56,14 +56,13 @@ const Header = () => {
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <Search className="w-5 h-5 text-gray-400" aria-hidden="true" />
           </div>
-          <Input
-            type="search"
-            placeholder="Search..."
-            className=""
-          />
+          <Input type="search" placeholder="Search..." className="" />
         </div>
         <Avatar>
-          <AvatarImage src="https://avatars.githubusercontent.com/u/124599?v=4" alt="User" />
+          <AvatarImage
+            src="https://avatars.githubusercontent.com/u/124599?v=4"
+            alt="User"
+          />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>

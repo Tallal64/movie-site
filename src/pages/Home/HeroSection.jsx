@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useGetPopularMoviesQuery } from "@/redux/services/services";
+import { useGetPopularMoviesQuery } from "@/redux/services/movies";
 import { CirclePlay, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 
