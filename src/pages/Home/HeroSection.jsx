@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { useGetPopularMoviesQuery } from "@/redux/services/movies";
+import { useGetAllQuery } from "@/redux/services/movies";
 import { CirclePlay, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [movies, SetMovies] = useState("");
-  const { data, error, isLoading } = useGetPopularMoviesQuery();
+  const { data, error, isLoading } = useGetAllQuery();
 
   // random selection
   const movie = movies[Math.floor(Math.random() * movies.length)];
@@ -17,8 +17,8 @@ const HeroSection = () => {
       console.log(isLoading);
     } else if (data) {
       SetMovies(data.results);
-      console.log(data.results);
-      console.log("random", movie);
+      // console.log(data.results);
+      // console.log("random", movie);
     } else {
       console.log("cheen tapak dam dam");
     }
@@ -38,7 +38,7 @@ const HeroSection = () => {
       ) : data ? (
         <div className="h-[720px] px-5 lg:px-12 pb-32 flex flex-col items-start justify-end gap-y-7">
           <h3 className="text-7xl font-semibold max-w-screen-lg">
-            {movie?.title}
+            {movie?.title || movie?.name}
           </h3>
           <p className="text-xl max-w-screen-lg font-medium text-white/65">
             {movie?.overview}

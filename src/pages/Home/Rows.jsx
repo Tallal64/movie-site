@@ -1,6 +1,9 @@
 import Row from "@/components/custom/Row";
 import { useGetTrendingMoviesQuery } from "@/redux/services/movies";
-import { useGetTrendingTvSeriesQuery } from "@/redux/services/tvSeriesApis";
+import {
+  useGetPopularPeopleQuery,
+  useGetTrendingTvSeriesQuery,
+} from "@/redux/services/tvSeriesApis";
 
 const Rows = () => {
   const {
@@ -13,11 +16,20 @@ const Rows = () => {
     error: seriesError,
     isLoading: seriesIsloading,
   } = useGetTrendingTvSeriesQuery();
+  const {
+    data: peopleData,
+    error: peopleError,
+    isLoading: peopleLoading,
+  } = useGetPopularPeopleQuery();
 
   return (
-    <div className="px-5 lg:px-12">
-      <Row title="movies trending nowadays" movies={trendingMoviesData?.results} />
+    <div className="px-5 lg:px-12 flex flex-col gap-y-4">
+      <Row
+        title="movies trending nowadays"
+        movies={trendingMoviesData?.results}
+      />
       <Row title="trending series" movies={trendingSeriesData?.results} />
+      <Row title="Popular actors" movies={peopleData?.results} />
     </div>
   );
 };

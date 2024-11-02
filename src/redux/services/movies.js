@@ -14,7 +14,15 @@ export const MovieApis = createApi({
   }),
 
   endpoints: (builder) => ({
+    // trending movies, tv shows, people "USED IN HERO_SECTION"
+    getAll: builder.query({
+      query: () => "trending/all/day",
+    }),
+
     // MOVIE LISTS
+    getMovieById: builder.query({
+      query: (movie_id) => `movie/${movie_id}`,
+    }),
     getTrendingMovies: builder.query({
       query: () => "trending/movie/day",
     }),
@@ -34,6 +42,8 @@ export const MovieApis = createApi({
 });
 
 export const {
+  useGetAllQuery,
+  useGetMovieByIdQuery,
   useGetTrendingMoviesQuery,
   useGetCurrentlyPlayingMoviesInTheatresQuery,
   useGetPopularMoviesQuery,

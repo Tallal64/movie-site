@@ -7,6 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Heart, Plus } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const Row = ({ title, movies }) => {
@@ -23,29 +24,41 @@ const Row = ({ title, movies }) => {
                 key={item?.id}
                 className="max-w-max overflow-hidden cursor-pointer"
               >
-                <Card className="relative overflow-hidden group">
-                  <img
-                    alt="Card image"
-                    src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item?.poster_path}`}
-                    className="transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-end p-5">
-                    <div className="flex flex-col gap-4">
-                      <Button
-                        size="icon"
-                        className="bg-foreground rounded-full text-muted-foreground hover:bg-gray-200 transition-colors duration-200"
-                      >
-                        <Plus className="w-6 h-6" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        className="bg-foreground rounded-full text-muted-foreground hover:bg-gray-200 transition-colors duration-200"
-                      >
-                        <Heart className="w-6 h-6" />
-                      </Button>
+                <NavLink to={`details/${item.media_type}/${item.id}`}>
+                  <Card className="relative overflow-hidden group">
+                    <img
+                      alt="Card image"
+                      src={
+                        title === "Popular actors"
+                          ? `https://image.tmdb.org/t/p/w138_and_h175_face/${item?.profile_path}`
+                          : `https://image.tmdb.org/t/p/w220_and_h330_face/${item?.poster_path}`
+                      }
+                      className="transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div
+                      className={`${
+                        title === "Popular actors"
+                          ? "hidden"
+                          : "absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-end p-5"
+                      } `}
+                    >
+                      <div className="flex flex-col gap-4">
+                        <Button
+                          size="icon"
+                          className="bg-foreground rounded-full text-muted-foreground hover:bg-gray-200 transition-colors duration-200"
+                        >
+                          <Plus className="w-6 h-6" />
+                        </Button>
+                        <Button
+                          size="icon"
+                          className="bg-foreground rounded-full text-muted-foreground hover:bg-gray-200 transition-colors duration-200"
+                        >
+                          <Heart className="w-6 h-6" />
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </Card>
+                  </Card>
+                </NavLink>
               </CarouselItem>
             ))}
           </CarouselContent>
