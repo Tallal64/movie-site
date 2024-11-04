@@ -1,12 +1,10 @@
 import Banner from "@/components/custom/Banner";
-import { useGetAllQuery } from "@/redux/services/movies";
+import { useGetTrendingMoviesQuery } from "@/redux/services/movies";
 import { useEffect, useState } from "react";
 
-const HeroSection = () => {
-  const [movies, SetMovies] = useState("");
-  const { data, error, isLoading } = useGetAllQuery();
-
-  // random selection
+const MovieShowCase = () => {
+  const [movies, setMovies] = useState("");
+  const { data, error, isLoading } = useGetTrendingMoviesQuery();
   const movie = movies[Math.floor(Math.random() * movies.length)];
 
   useEffect(() => {
@@ -15,9 +13,9 @@ const HeroSection = () => {
     } else if (isLoading) {
       console.log(isLoading);
     } else if (data) {
-      SetMovies(data.results);
-      // console.log("hersocljasdfl", data.results);
-      // console.log("random", movie);
+      setMovies(data.results);
+      // console.log(data.results);
+      // console.log("random", TvShow);
     } else {
       console.log("cheen tapak dam dam");
     }
@@ -43,4 +41,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default MovieShowCase;

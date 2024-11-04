@@ -1,13 +1,11 @@
 import Banner from "@/components/custom/Banner";
-import { useGetAllQuery } from "@/redux/services/movies";
+import { useGetTrendingTvSeriesQuery } from "@/redux/services/tvSeriesApis";
 import { useEffect, useState } from "react";
 
-const HeroSection = () => {
-  const [movies, SetMovies] = useState("");
-  const { data, error, isLoading } = useGetAllQuery();
-
-  // random selection
-  const movie = movies[Math.floor(Math.random() * movies.length)];
+const TvShowCase = () => {
+  const [TvShows, setTvShows] = useState("");
+  const { data, error, isLoading } = useGetTrendingTvSeriesQuery();
+  const TvShow = TvShows[Math.floor(Math.random() * TvShows.length)];
 
   useEffect(() => {
     if (error) {
@@ -15,13 +13,13 @@ const HeroSection = () => {
     } else if (isLoading) {
       console.log(isLoading);
     } else if (data) {
-      SetMovies(data.results);
-      // console.log("hersocljasdfl", data.results);
-      // console.log("random", movie);
+      setTvShows(data.results);
+      // console.log(data.results);
+      // console.log("random", TvShow);
     } else {
       console.log("cheen tapak dam dam");
     }
-  }, [error, isLoading, data, movie]);
+  }, [error, isLoading, data, TvShow]);
 
   return (
     <div className="">
@@ -35,7 +33,7 @@ const HeroSection = () => {
       ) : isLoading ? (
         <div className="text-secondary-foreground">Loading...</div>
       ) : data ? (
-        <Banner media_type={movie} />
+        <Banner media_type={TvShow} />
       ) : (
         <p>error hai pai</p>
       )}
@@ -43,4 +41,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default TvShowCase;

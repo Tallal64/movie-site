@@ -11,7 +11,7 @@ const Header = () => {
     },
     {
       label: "TV Shows",
-      href: "tv-shows",
+      href: "tv",
     },
     {
       label: "Movies",

@@ -10,7 +10,7 @@ import { Heart, Plus } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Button } from "../ui/button";
 
-const Row = ({ title, movies }) => {
+const Row = ({ title, data, media_type }) => {
   return (
     <div className="-mt-4 px-10 mb-10">
       <h3 className="text-2xl font-body capitalize font-semibold mb-4">
@@ -19,17 +19,21 @@ const Row = ({ title, movies }) => {
       <Carousel>
         <div className="rounded-lg overflow-hidden">
           <CarouselContent>
-            {movies?.map((item) => (
+            {data?.map((item) => (
               <CarouselItem
                 key={item?.id}
-                className="max-w-max overflow-hidden cursor-pointer"
+                className="max-w-max overflow-hidden"
               >
-                <NavLink to={`details/${item.media_type}/${item.id}`}>
+                <NavLink
+                  to={`/details/${media_type || item?.media_type}/${item.id}`}
+                >
                   <Card className="relative overflow-hidden group">
                     <img
                       alt="Card image"
                       src={
-                        title === "Popular actors"
+                        item?.profile_path === null
+                          ? null
+                          : title === "Popular actors"
                           ? `https://image.tmdb.org/t/p/w138_and_h175_face/${item?.profile_path}`
                           : `https://image.tmdb.org/t/p/w220_and_h330_face/${item?.poster_path}`
                       }

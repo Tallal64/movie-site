@@ -21,8 +21,9 @@ const Detail = () => {
   } = useGetTvSeriesByIdQuery(media_type === "tv" ? Id : skipToken);
 
   useEffect(() => {
-    console.log("userid", Id);
-    console.log("media_type", media_type);
+    console.log("seriesData", seriesData);
+    console.log("MovieData", MovieData);
+    // console.log("media_type", media_type);
   });
 
   return (

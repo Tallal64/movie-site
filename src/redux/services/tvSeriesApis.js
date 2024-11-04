@@ -14,11 +14,15 @@ export const TvSeriesApis = createApi({
   }),
 
   endpoints: (builder) => ({
-    // poputar people
+    getTvShowVideos: builder.query({
+      query: (tv_id) => `tv/${tv_id}/videos`,
+    }),
+
+    // popular people
     getPopularPeople: builder.query({
       query: () => "person/popular",
     }),
-    
+
     // TV SERIES LISTS
     getTvSeriesById: builder.query({
       query: (series_id) => `tv/${series_id}`,
@@ -42,6 +46,7 @@ export const TvSeriesApis = createApi({
 });
 
 export const {
+  useGetTvShowVideosQuery,
   useGetPopularPeopleQuery,
   useGetTvSeriesByIdQuery,
   useGetTrendingTvSeriesQuery,
