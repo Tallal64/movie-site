@@ -16,15 +16,20 @@ const TvRows = () => {
   const { data: AiringTodayData } = useGetTvSeriesAiringTodayQuery();
 
   useEffect(() => {
-    console.log("OnAirTvSeriesData", OnAirTvSeriesData?.results);
-    console.log("TopRatedTvSeriesData", TopRatedTvSeriesData?.results);
-    console.log("PopularTvSeriesData", PopularTvSeriesData?.results);
-    console.log("TrendingTvSeriesData", TrendingTvSeriesData?.results);
+    console.log("on air", OnAirTvSeriesData?.results);
+    console.log("top rated shows", TopRatedTvSeriesData?.results);
+    console.log("Popular series", PopularTvSeriesData?.results);
+    console.log("trending", TrendingTvSeriesData?.results);
+    console.log("airing today", AiringTodayData?.results);
   });
 
   return (
     <div className="px-5 lg:px-12 flex flex-col gap-y-4">
-      <Row title="on air" media_type={"tv"} item={OnAirTvSeriesData?.results} />
+      <Row
+        title="airing nowadays"
+        media_type={"tv"}
+        data={OnAirTvSeriesData?.results}
+      />
       <Row
         title="top rated shows"
         media_type={"tv"}
