@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useGetTvShowVideosQuery } from "@/redux/services/tvSeriesApis";
 import { skipToken } from "@reduxjs/toolkit/query/react";
 import { CirclePlay } from "lucide-react";
@@ -6,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const DetailComp = ({ poster, title, overview, genre, backDrop }) => {
-  // https://api.themoviedb.org/3/tv/194764/videos?api_key=699eb2d0992b7bdf003eb03f35cb3eb1
   const [clicked, setClicked] = useState(false);
   const { Id: tv_id } = useParams();
   const { data, error, isLoading } = useGetTvShowVideosQuery(

@@ -1,4 +1,3 @@
-import React from "react";
 import MovieRows from "./MovieRows";
 import MovieShowCase from "./MovieShowCase";
 

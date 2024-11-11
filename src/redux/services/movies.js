@@ -16,7 +16,7 @@ export const MovieApis = createApi({
   endpoints: (builder) => ({
     // Use multi search when you want to search for movies, TV shows and people in a single request.
     getSearch: builder.query({
-      query: () => `search/multi`,
+      query: (searchQuery) => `search/multi?query=${searchQuery}`,
     }),
     // trending movies, tv shows, people "USED IN HERO_SECTION"
     getAll: builder.query({
