@@ -14,11 +14,14 @@ export const MovieApis = createApi({
   }),
 
   endpoints: (builder) => ({
+    // Use multi search when you want to search for movies, TV shows and people in a single request.
+    getSearch: builder.query({
+      query: () => `search/multi`,
+    }),
     // trending movies, tv shows, people "USED IN HERO_SECTION"
     getAll: builder.query({
       query: () => "trending/all/day",
     }),
-
     // MOVIE LISTS
     getMovieById: builder.query({
       query: (movie_id) => `movie/${movie_id}`,
@@ -42,6 +45,7 @@ export const MovieApis = createApi({
 });
 
 export const {
+  useGetSearchQuery,
   useGetAllQuery,
   useGetMovieByIdQuery,
   useGetTrendingMoviesQuery,
