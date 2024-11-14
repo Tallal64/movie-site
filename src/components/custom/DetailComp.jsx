@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useGetTvShowVideosQuery } from "@/redux/services/tvSeriesApis";
 import { skipToken } from "@reduxjs/toolkit/query/react";
@@ -82,7 +83,7 @@ const DetailComp = ({ poster, title, overview, genre, backDrop }) => {
       </div>
 
       {/* backDrop */}
-      <div className="absolute right-0 top-0 h-[80vh] w-full -z-10">
+      <div className="absolute right-0 top-0 h-[90vh] w-full -z-10">
         <div className="absolute top-0 right-0 w-full h-full bg-black/75" />
         <img
           alt="img"

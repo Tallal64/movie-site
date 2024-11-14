@@ -26,7 +26,7 @@ const HeroSection = () => {
   return (
     <div className="">
       {/* bottom strip to blur the showCase img from it's bottom */}
-      <div className="absolute bottom-[-5%] w-full h-28 bg-background blur-xl border" />
+      <div className="absolute -z-10 bottom-[-5%] w-full h-28 bg-background blur-xl border" />
 
       {error ? (
         <div className="text-xl text-primary capitalize">

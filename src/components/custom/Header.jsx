@@ -21,16 +21,16 @@ const Header = () => {
   const [searchData, setSearchData] = useState(undefined);
   const { data, isLoading, error } = useGetSearchQuery(searchQuery);
 
-  // useEffect(() => {
-  //   const down = (e) => {
-  //     if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-  //       e.preventDefault();
-  //       setOpen((open) => !open);
-  //     }
-  //   };
-  //   document.addEventListener("keydown", down);
-  //   return () => document.removeEventListener("keydown", down);
-  // }, []);
+  useEffect(() => {
+    function handleCtrlKey(e) {
+      if (e.key === "k" && e.ctrlKey) {
+        e.preventDefault();
+        setOpen(true);
+      }
+    }
+
+    window.addEventListener("keydown", handleCtrlKey);
+  });
 
   useEffect(() => {
     if (error) {
@@ -57,10 +57,6 @@ const Header = () => {
     {
       label: "Movies",
       href: "movies",
-    },
-    {
-      label: "New & Popular",
-      href: "new-and-popular",
     },
     {
       label: "My List",
@@ -106,7 +102,7 @@ const Header = () => {
               type="button"
               className="h-5 px-2 bg-[#27272a] space-x-1 rounded"
             >
-              <span className="text-[10px]">⌘ </span>
+              <span className="text-[10px]">⌘</span>
               <span className="text-xs"> K</span>
             </Badge>
           </Button>
@@ -128,7 +124,7 @@ const Header = () => {
                     {query?.name || query.title ? (
                       <CommandItem className="flex items-center gap-2 px-4 py-2">
                         <NavLink
-                          to={"#"}
+                          to={`details/${query.media_type}/${query.id}`}
                           className={"flex items-center gap-x-3"}
                         >
                           <Video className="h-4 w-4 text-white/40" />

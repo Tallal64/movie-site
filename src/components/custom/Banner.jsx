@@ -4,7 +4,7 @@ import { CirclePlay, Info } from "lucide-react";
 
 const Banner = ({ media_type }) => {
   return (
-    <div className="h-[720px] px-5 lg:px-12 pb-32 flex flex-col items-start justify-end gap-y-7">
+    <div className="h-[80vh] px-5 lg:px-12 pb-32 flex flex-col items-start justify-end gap-y-7">
       <h3 className="text-7xl font-semibold max-w-screen-lg">
         {media_type?.title || media_type?.name}
       </h3>
@@ -23,7 +23,7 @@ const Banner = ({ media_type }) => {
       </div>
 
       {/* background image */}
-      <div className="absolute right-0 top-0 h-full w-full -z-10 ">
+      <div className="absolute right-0 top-0 h-full w-full -z-20 ">
         <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-black/90" />
         <img
           alt="img"
