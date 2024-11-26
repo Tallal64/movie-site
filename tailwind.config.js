@@ -6,7 +6,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ["Oswald", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        body: ["poppins", "sans-serif"],
         title: ["Bebas Neue", "cursive"], // Title font
       },
 

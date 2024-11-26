@@ -34,7 +34,7 @@ const Rows = () => {
         data={trendingMoviesData?.results}
       />
       <Row title="trending series" data={trendingSeriesData?.results} />
-      <Row title="Popular actors" data={peopleData?.results} />
+      {/* <Row title="Popular actors" data={peopleData?.results} /> */}
     </div>
   );
 };
