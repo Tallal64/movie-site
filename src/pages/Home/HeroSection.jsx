@@ -1,4 +1,5 @@
 import Banner from "@/components/custom/Banner";
+import BannerSkeleton from "@/components/custom/Skeletons/BannerSkeleton";
 import { useGetAllQuery } from "@/redux/services/movies";
 import { useEffect, useState } from "react";
 
@@ -33,7 +34,9 @@ const HeroSection = () => {
           there was an error while fetching the API
         </div>
       ) : isLoading ? (
-        <div className="text-secondary-foreground">Loading...</div>
+        <div className="text-secondary-foreground">
+          <BannerSkeleton />
+        </div>
       ) : data ? (
         <Banner media_type={movie} />
       ) : (

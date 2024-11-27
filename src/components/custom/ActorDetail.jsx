@@ -29,7 +29,7 @@ const ActorDetail = () => {
       ) : personData ? (
         <>
           <div className="flex justify-between px-32">
-            <div className="flex-1">
+            <div className="flex-1 flex justify-center">
               <div className="w-[330px] h-[450px]">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${personData?.profile_path}`}
@@ -47,15 +47,17 @@ const ActorDetail = () => {
             {creditsLoading ? (
               <>loading the skeleton...</>
             ) : creditsData ? (
-              <h2 className="text-2xl font-body capitalize mb-7">
-                Other movies by
-                <span className="text-green-600 font-semibold">
-                  {" "}
-                  {personData?.title || personData?.name}
-                </span>
-              </h2>
+              <>
+                <h2 className="text-2xl font-body capitalize mb-7">
+                  Other movies by
+                  <span className="text-green-600 font-semibold">
+                    {" "}
+                    {personData?.title || personData?.name}
+                  </span>
+                </h2>
+                <Row data={creditsData?.cast || creditsData?.cast} />
+              </>
             ) : null}
-            <Row data={creditsData?.cast || creditsData?.cast} />
           </div>
         </>
       ) : null}

@@ -1,6 +1,8 @@
 import ActorDetail from "@/components/custom/ActorDetail";
 import DetailComp from "@/components/custom/DetailComp";
 import Row from "@/components/custom/Row";
+import DetailSkeleton from "@/components/custom/Skeletons/DetailSkeleton";
+import RowSkeleton from "@/components/custom/Skeletons/RowSkeleton";
 import {
   useGetMovieByIdQuery,
   useGetRecommendedMoviesQuery,
@@ -10,7 +12,6 @@ import {
   useGetTvSeriesByIdQuery,
 } from "@/redux/services/tvSeriesApis";
 import { skipToken } from "@reduxjs/toolkit/query/react";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Detail = () => {
@@ -33,12 +34,6 @@ const Detail = () => {
   const { data: recommendedTvData, isLoading: recommendedTvLoading } =
     useGetRecommendedTvShowsQuery(Id);
 
-  useEffect(() => {
-    // console.log("seriesData", seriesData);
-    // console.log("MovieData", MovieData);
-    // console.log("recommendedData", recommendedData?.results);
-  });
-
   if (media_type === "actorDetail") {
     return <ActorDetail />;
   }
@@ -48,7 +43,7 @@ const Detail = () => {
       {MovieError || seriesError ? (
         <div>error while fetching in detail.jsx</div>
       ) : MovieLoading || seriesLoading ? (
-        <div>loading skeleton....</div>
+        <DetailSkeleton />
       ) : MovieData || seriesData ? (
         <>
           <div className="flex gap-x-10 pt-5">
@@ -69,19 +64,21 @@ const Detail = () => {
 
           <div>
             {recommendedLoading || recommendedTvLoading ? (
-              <>loading the skeleton...</>
+              <RowSkeleton />
             ) : recommendedData || recommendedTvData ? (
-              <h2 className="text-2xl font-body capitalize mb-7">
-                recommended after watching
-                <span className="text-secondary font-bold">
-                  {" "}
-                  {MovieData?.title || seriesData?.name}
-                </span>
-              </h2>
+              <>
+                <h2 className="text-2xl font-body capitalize mb-7">
+                  recommended after watching
+                  <span className="text-secondary font-bold">
+                    {" "}
+                    {MovieData?.title || seriesData?.name}
+                  </span>
+                </h2>
+                <Row
+                  data={recommendedData?.results || recommendedTvData?.results}
+                />
+              </>
             ) : null}
-            <Row
-              data={recommendedData?.results || recommendedTvData?.results}
-            />
           </div>
         </>
       ) : null}

@@ -1,4 +1,5 @@
 import Row from "@/components/custom/Row";
+import RowSkeleton from "@/components/custom/Skeletons/RowSkeleton";
 import { useGetTrendingMoviesQuery } from "@/redux/services/movies";
 import { useGetTrendingTvSeriesQuery } from "@/redux/services/tvSeriesApis";
 import { useEffect } from "react";
@@ -11,8 +12,8 @@ const Rows = () => {
   } = useGetTrendingMoviesQuery();
   const {
     data: trendingSeriesData,
-    error: seriesError,
-    isLoading: seriesIsloading,
+    error: trendingSeriesError,
+    isLoading: trendingSeriesIsloading,
   } = useGetTrendingTvSeriesQuery();
 
   useEffect(() => {
@@ -21,11 +22,19 @@ const Rows = () => {
 
   return (
     <div className="px-5 lg:px-12 flex flex-col gap-y-4">
-      <Row
-        title="movies trending nowadays"
-        data={trendingMoviesData?.results}
-      />
-      <Row title="trending series" data={trendingSeriesData?.results} />
+      {trendingMoviesError || trendingSeriesError ? (
+        <>There was an error</>
+      ) : trendingMoviesLoading || trendingSeriesIsloading ? (
+        <RowSkeleton count={2} />
+      ) : trendingMoviesData || trendingSeriesData ? (
+        <>
+          <Row
+            title="movies trending nowadays"
+            data={trendingMoviesData?.results}
+          />
+          <Row title="trending series" data={trendingSeriesData?.results} />
+        </>
+      ) : null}
     </div>
   );
 };
