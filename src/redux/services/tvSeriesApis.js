@@ -17,14 +17,6 @@ export const TvSeriesApis = createApi({
     getTvShowVideos: builder.query({
       query: (tv_id) => `tv/${tv_id}/videos`,
     }),
-    // get all actors of tv show
-    getPopularPeople: builder.query({
-      query: () => "person/popular",
-    }),
-    // popular people
-    getCreditsTv: builder.query({
-      query: (series_id) => `tv/${series_id}/credits`,
-    }),
     // Get recommended tvShows
     getRecommendedTvShows: builder.query({
       query: (series_id) => `tv/${series_id}/recommendations`,
@@ -53,8 +45,6 @@ export const TvSeriesApis = createApi({
 
 export const {
   useGetTvShowVideosQuery,
-  useGetPopularPeopleQuery,
-  useGetCreditsTvQuery,
   useGetRecommendedTvShowsQuery,
   useGetTvSeriesByIdQuery,
   useGetTrendingTvSeriesQuery,

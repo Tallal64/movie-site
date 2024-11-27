@@ -1,8 +1,8 @@
+import ActorDetail from "@/components/custom/ActorDetail";
 import DetailComp from "@/components/custom/DetailComp";
 import Row from "@/components/custom/Row";
 import {
   useGetMovieByIdQuery,
-  useGetPersonByIdQuery,
   useGetRecommendedMoviesQuery,
 } from "@/redux/services/movies";
 import {
@@ -26,36 +26,28 @@ const Detail = () => {
     error: seriesError,
     isLoading: seriesLoading,
   } = useGetTvSeriesByIdQuery(media_type === "tv" ? Id : skipToken);
-  const {
-    data: personData,
-    error: personError,
-    isLoading: personLoading,
-  } = useGetPersonByIdQuery(media_type === "person" ? Id : skipToken);
 
-  const {
-    data: recommendedData,
-    error: recommendedError,
-    isLoading: recommendedLoading,
-  } = useGetRecommendedMoviesQuery(Id);
+  const { data: recommendedData, isLoading: recommendedLoading } =
+    useGetRecommendedMoviesQuery(Id);
 
-  const {
-    data: recommendedTvData,
-    error: recommendedTvError,
-    isLoading: recommendedTvLoading,
-  } = useGetRecommendedTvShowsQuery(Id);
+  const { data: recommendedTvData, isLoading: recommendedTvLoading } =
+    useGetRecommendedTvShowsQuery(Id);
 
   useEffect(() => {
-    console.log("seriesData", seriesData);
-    console.log("MovieData", MovieData);
-    // console.log("personData", personData?.name);
+    // console.log("seriesData", seriesData);
+    // console.log("MovieData", MovieData);
     // console.log("recommendedData", recommendedData?.results);
   });
 
+  if (media_type === "actorDetail") {
+    return <ActorDetail />;
+  }
+
   return (
     <div className="px-5 lg:px-12">
-      {MovieError || seriesError || personError ? (
+      {MovieError || seriesError ? (
         <div>error while fetching in detail.jsx</div>
-      ) : MovieLoading || seriesLoading || personLoading ? (
+      ) : MovieLoading || seriesLoading ? (
         <div>loading skeleton....</div>
       ) : MovieData || seriesData ? (
         <>

@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useGetCreditsQuery } from "@/redux/services/movies";
 import {
+  useGetCreditsQuery,
   useGetCreditsTvQuery,
-  useGetTvShowVideosQuery,
-} from "@/redux/services/tvSeriesApis";
+} from "@/redux/services/person";
+import { useGetTvShowVideosQuery } from "@/redux/services/tvSeriesApis";
 import { skipToken } from "@reduxjs/toolkit/query/react";
 import { CirclePlay } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -26,7 +26,7 @@ const DetailComp = ({
   backDrop,
 }) => {
   const [clicked, setClicked] = useState(false);
-  const { Id } = useParams();
+  const { Id, media_type: mediaType } = useParams();
   const { data, error, isLoading } = useGetTvShowVideosQuery();
 
   const {
@@ -106,14 +106,16 @@ const DetailComp = ({
               {/* cast */}
               <div className="">
                 {movieCastData?.cast || tvCastData?.cast ? (
-                  <h2 className="text-2xl font-body capitalize my-7">
-                    top bill cast
-                  </h2>
+                  <>
+                    <h2 className="text-2xl font-body capitalize my-7">
+                      top bill cast
+                    </h2>
+                    <Row
+                      data={movieCastData?.cast || tvCastData?.cast}
+                      className="max-w-screen-sm"
+                    />
+                  </>
                 ) : null}
-                <Row
-                  data={movieCastData?.cast || tvCastData?.cast}
-                  className="max-w-screen-sm"
-                />
               </div>
             </div>
           </div>

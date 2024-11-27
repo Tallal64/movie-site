@@ -8,10 +8,18 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Heart, Plus } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { Button } from "../ui/button";
+import { nanoid } from "nanoid";
 
 const Row = ({ title, data, media_type, ...restProps }) => {
+  let { media_type: mediaType } = useParams();
+
+  useEffect(() => {
+    console.log("in row.jsx", mediaType);
+  });
+
   return (
     <div className="-mt-4 px-10 mb-10">
       <h3 className="text-2xl font-body capitalize font-semibold mb-4">
@@ -22,13 +30,13 @@ const Row = ({ title, data, media_type, ...restProps }) => {
           <CarouselContent>
             {data?.map((item) => (
               <CarouselItem
-                key={item?.id}
+                key={nanoid()}
                 className="max-w-max overflow-hidden"
               >
                 <NavLink
-                  to={`/details/${media_type || item?.media_type || "person"}/${
-                    item.id
-                  }`}
+                  to={`/details/${
+                    media_type || item?.media_type || "actorDetail"
+                  }/${item.id}`}
                 >
                   <Card className="relative overflow-hidden group">
                     {item?.profile_path || item?.poster_path ? (

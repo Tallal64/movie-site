@@ -18,10 +18,6 @@ export const MovieApis = createApi({
     getSearch: builder.query({
       query: (searchQuery) => `search/multi?query=${searchQuery}`,
     }),
-    // Get list of actors
-    getCredits: builder.query({
-      query: (movie_id) => `movie/${movie_id}/credits`,
-    }),
     // Get recommended movies
     getRecommendedMovies: builder.query({
       query: (movie_id) => `movie/${movie_id}/recommendations`,
@@ -29,10 +25,6 @@ export const MovieApis = createApi({
     // trending movies, tv shows, people "USED IN HERO_SECTION"
     getAll: builder.query({
       query: () => "trending/all/day",
-    }),
-    // GET PERSON BY ID
-    getPersonById: builder.query({
-      query: (person_id) => `/person/${person_id}`,
     }),
     // MOVIE LISTS
     getMovieById: builder.query({
@@ -58,10 +50,8 @@ export const MovieApis = createApi({
 
 export const {
   useGetSearchQuery,
-  useGetCreditsQuery,
   useGetRecommendedMoviesQuery,
   useGetAllQuery,
-  useGetPersonByIdQuery,
   useGetMovieByIdQuery,
   useGetTrendingMoviesQuery,
   useGetCurrentlyPlayingMoviesInTheatresQuery,
