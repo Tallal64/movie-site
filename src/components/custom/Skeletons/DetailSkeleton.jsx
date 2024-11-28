@@ -19,7 +19,6 @@ const DetailSkeleton = () => {
             </div>
           </div>
           <Skeleton className="h-[60px] w-[200px] rounded-xl" />
-          {/* top bill cast */}
         </div>
       </div>
     </div>

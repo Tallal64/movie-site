@@ -6,6 +6,7 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Row from "./Row";
+import ActorDetailSkeleton from "./Skeletons/ActorDetailSkeleton";
 
 const ActorDetail = () => {
   let { Id, media_type } = useParams();
@@ -25,7 +26,7 @@ const ActorDetail = () => {
   return (
     <div>
       {personLoading ? (
-        <>loading skeleton...</>
+        <ActorDetailSkeleton />
       ) : personData ? (
         <>
           <div className="flex justify-between px-32">
@@ -47,7 +48,7 @@ const ActorDetail = () => {
             {creditsLoading ? (
               <>loading the skeleton...</>
             ) : creditsData ? (
-              <>
+              <div className="px-12">
                 <h2 className="text-2xl font-body capitalize mb-7">
                   Other movies by
                   <span className="text-green-600 font-semibold">
@@ -56,7 +57,7 @@ const ActorDetail = () => {
                   </span>
                 </h2>
                 <Row data={creditsData?.cast || creditsData?.cast} />
-              </>
+              </div>
             ) : null}
           </div>
         </>

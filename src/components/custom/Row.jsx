@@ -54,7 +54,6 @@ const Row = ({ title, data, media_type, ...restProps }) => {
                         />
                       )
                     ) : null}
-
                     <div
                       className={`${
                         item?.profile_path

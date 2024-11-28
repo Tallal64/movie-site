@@ -12,6 +12,7 @@ import {
   useGetTvSeriesByIdQuery,
 } from "@/redux/services/tvSeriesApis";
 import { skipToken } from "@reduxjs/toolkit/query/react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Detail = () => {
@@ -28,11 +29,16 @@ const Detail = () => {
     isLoading: seriesLoading,
   } = useGetTvSeriesByIdQuery(media_type === "tv" ? Id : skipToken);
 
-  const { data: recommendedData, isLoading: recommendedLoading } =
-    useGetRecommendedMoviesQuery(Id);
+  const { data: recommendedMovieData, isLoading: recommendedLoading } =
+    useGetRecommendedMoviesQuery(media_type === "movie" ? Id : skipToken);
 
   const { data: recommendedTvData, isLoading: recommendedTvLoading } =
-    useGetRecommendedTvShowsQuery(Id);
+    useGetRecommendedTvShowsQuery(media_type === "tv" ? Id : skipToken);
+
+  useEffect(() => {
+    console.log("recommendedData: ", recommendedMovieData?.results);
+    console.log("recommendedTvData: ", recommendedTvData?.results);
+  });
 
   if (media_type === "actorDetail") {
     return <ActorDetail />;
@@ -65,7 +71,7 @@ const Detail = () => {
           <div>
             {recommendedLoading || recommendedTvLoading ? (
               <RowSkeleton />
-            ) : recommendedData || recommendedTvData ? (
+            ) : recommendedMovieData?.results || recommendedTvData?.results ? (
               <>
                 <h2 className="text-2xl font-body capitalize mb-7">
                   recommended after watching
@@ -75,7 +81,9 @@ const Detail = () => {
                   </span>
                 </h2>
                 <Row
-                  data={recommendedData?.results || recommendedTvData?.results}
+                  data={
+                    recommendedMovieData?.results || recommendedTvData?.results
+                  }
                 />
               </>
             ) : null}

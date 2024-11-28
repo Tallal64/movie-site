@@ -4,13 +4,15 @@ import {
   useGetCreditsQuery,
   useGetCreditsTvQuery,
 } from "@/redux/services/person";
-import { useGetTvShowVideosQuery } from "@/redux/services/tvSeriesApis";
-import { skipToken } from "@reduxjs/toolkit/query/react";
 import { CirclePlay } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "../ui/button";
 import Row from "./Row";
+import { skipToken } from "@reduxjs/toolkit/query";
+import RowSkeleton from "./Skeletons/RowSkeleton";
+import { Skeleton } from "../ui/skeleton";
+import BillCastSkeleton from "./Skeletons/BillCastSkeleton";
 
 const DetailComp = ({
   poster,
@@ -25,29 +27,20 @@ const DetailComp = ({
   genre,
   backDrop,
 }) => {
-  const [clicked, setClicked] = useState(false);
   const { Id, media_type: mediaType } = useParams();
-  const { data, error, isLoading } = useGetTvShowVideosQuery();
 
   const {
     data: movieCastData,
     error: movieCastError,
     isLoading: movieCastLoading,
-  } = useGetCreditsQuery(Id);
+  } = useGetCreditsQuery(mediaType === "movie" ? Id : skipToken);
   const {
     data: tvCastData,
     error: tvCastError,
     isLoading: tvCastLoading,
-  } = useGetCreditsTvQuery(Id);
-
-  const videos = data?.results;
-
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
+  } = useGetCreditsTvQuery(mediaType === "tv" ? Id : skipToken);
 
   useEffect(() => {
-    // console.log("video data",data?.results);
     console.log("bill cast", movieCastData?.cast);
   });
 
@@ -97,7 +90,6 @@ const DetailComp = ({
               <Button
                 size="xl"
                 className="mt-5 text-lg shadow-lg shadow-[#D32F2F]/75"
-                onClick={handleClick}
               >
                 <CirclePlay className="!w-6 !h-6" />
                 <p className="capitalize">watch Trailer</p>
@@ -105,7 +97,9 @@ const DetailComp = ({
 
               {/* cast */}
               <div className="">
-                {movieCastData?.cast || tvCastData?.cast ? (
+                {movieCastLoading || tvCastLoading ? (
+                  <BillCastSkeleton />
+                ) : movieCastData?.cast || tvCastData?.cast ? (
                   <>
                     <h2 className="text-2xl font-body capitalize my-7">
                       top bill cast
@@ -118,31 +112,6 @@ const DetailComp = ({
                 ) : null}
               </div>
             </div>
-          </div>
-
-          {/* videos */}
-          <div className="m-16">
-            {clicked && videos && videos.length > 0 ? (
-              <div>
-                {videos
-                  .filter(
-                    (video) =>
-                      video.site === "YouTube" && video.type === "Trailer"
-                  ) // Filtering by site and type
-                  .map((video) => (
-                    <div key={video.id}>
-                      <iframe
-                        width="560"
-                        height="315"
-                        src={`https://www.youtube.com/embed/${video.key}`}
-                        title={video.name}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  ))}
-              </div>
-            ) : null}
           </div>
         </div>
 
